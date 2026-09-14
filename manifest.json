@@ -1,0 +1,12 @@
+{
+  "display_name": "Atlas 场景绘图",
+  "loading_order": 100,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "Atlas Scene contributors",
+  "version": "1.0.0",
+  "homePage": "https://github.com/Entropy2077-axe/SillyTavern-Atlas-Scene",
+  "minimum_client_version": "1.14.0"
+}

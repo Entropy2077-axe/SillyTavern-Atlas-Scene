@@ -1,0 +1,7 @@
+#atlas-scene-settings .atlas-fields { display: grid; gap: 10px; padding: 10px 0; }
+#atlas-scene-settings label { display: grid; gap: 4px; }
+#atlas-scene-settings label.checkbox_label { display: flex; }
+#atlas-scene-settings .atlas-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+#atlas-scene-settings .atlas-note { opacity: .75; font-size: .9em; }
+#atlas-scene-settings output { white-space: pre-wrap; overflow-wrap: anywhere; }
+#atlas-scene-settings textarea { min-height: 75px; }
