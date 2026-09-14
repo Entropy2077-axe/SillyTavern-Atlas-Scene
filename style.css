@@ -5,3 +5,13 @@
 #atlas-scene-settings .atlas-note { opacity: .75; font-size: .9em; }
 #atlas-scene-settings output { white-space: pre-wrap; overflow-wrap: anywhere; }
 #atlas-scene-settings textarea { min-height: 75px; }
+#atlas-scene-settings .atlas-actions .menu_button {
+    width: auto; min-width: 0; max-width: 100%; height: auto;
+    flex: 1 0 auto; white-space: nowrap; word-break: normal;
+    padding: 8px 12px; margin: 0; writing-mode: horizontal-tb;
+}
+#atlas-scene-settings .atlas-fields > * { min-width: 0; }
+@media (max-width: 600px) {
+    #atlas-scene-settings .atlas-actions { flex-direction: column; align-items: stretch; }
+    #atlas-scene-settings .atlas-actions .menu_button { width: 100%; flex: none; }
+}

@@ -2,14 +2,15 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFile} from 'node:fs/promises';
+import {checkAborted,uniqueId} from '../compat.js';
 import {sceneText} from '../atlas.js';
-const source=(await readFile(new URL('../index.js',import.meta.url),'utf8')).replace(/^import .*\n/,'');
+const source=(await readFile(new URL('../index.js',import.meta.url),'utf8')).replace(/^import .*\r?\n/gm,'');
 function harness(generator) {
  const handlers={}, nodes=new Map();
  const panel={querySelector(s){if(!nodes.has(s))nodes.set(s,{addEventListener(){},textContent:''});return nodes.get(s);},querySelectorAll(){return [];}};
  let uploads=0,saves=0,attachments=0;
  const context={chat:[{name:'User',is_user:true,mes:'Enter the tavern'},{name:'Character',mes:'The candles flicker.'}],extensionSettings:{atlas_scene:{enabled:true,refine:false}},event_types:{APP_READY:'ready',CHARACTER_MESSAGE_RENDERED:'reply',USER_MESSAGE_RENDERED:'user',CHAT_CHANGED:'change'},eventSource:{on:(e,f)=>handlers[e]=f},getRequestHeaders:()=>({}),appendMediaToMessage:()=>attachments++,saveChat:async()=>saves++,saveSettingsDebounced(){}};
- const sandbox={SillyTavern:{getContext:()=>context},document:{getElementById:id=>id==='atlas-scene-settings'?null:{append(){}},createElement:()=>panel},generate:generator,request:async()=>({}),sceneText,setTimeout,clearTimeout,AbortController,crypto:globalThis.crypto,$:()=>({}),fetch:async()=>{uploads++;return{ok:true,json:async()=>({path:'/user/images/atlas.png'})};}};
+ const sandbox={SillyTavern:{getContext:()=>context},document:{getElementById:id=>id==='atlas-scene-settings'?null:{append(){}},createElement:()=>panel},generate:generator,request:async()=>({}),sceneText,checkAborted,uniqueId,setTimeout,clearTimeout,AbortController,crypto:globalThis.crypto,$:()=>({}),fetch:async()=>{uploads++;return{ok:true,json:async()=>({path:'/user/images/atlas.png'})};}};
  vm.createContext(sandbox); vm.runInContext(source,sandbox); vm.runInContext('init(); key="test";',sandbox);
  return {context,handlers,nodes,run:code=>vm.runInContext(code,sandbox),stats:()=>({uploads,saves,attachments})};
 }

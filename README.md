@@ -2,6 +2,13 @@
 
 专用于 Atlas Cloud 的场景插图扩展，默认模型 `z-image/turbo`。不依赖原生生图扩展、Extras 或服务端插件。适配 SillyTavern 1.14+ 的消息媒体附件接口；建议使用当前稳定版及新版 Chrome / Edge。
 
+## 1.0.1 修复
+
+- 修复部分手机浏览器缺少 AbortSignal.timeout、AbortSignal.any、throwIfAborted 导致余额与绘图失败的问题。
+- 移除图片文件名对 HTTPS 环境下 crypto.randomUUID 的依赖。
+- 修复手机端按钮宽度被酒馆样式压缩、文字竖排的问题。
+- 增加旧版浏览器 API 环境回归测试，共 14 项测试通过。手机实际显示仍需设备验证。
+
 ## 安装
 
 ### 从 GitHub 安装（推荐）
